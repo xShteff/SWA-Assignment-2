@@ -19,7 +19,7 @@ namespace SWA_Assignment_2.Controllers
             return View();
         }
 
-        public ActionResult GetJson()
+        public ActionResult GetUsers()
         {
             return Json(new Person{Name = new Name{ FirstName = "Nico", LastName = "Sandival"}});
         }

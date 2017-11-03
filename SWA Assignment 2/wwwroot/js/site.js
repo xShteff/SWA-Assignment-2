@@ -73,12 +73,13 @@ employeeListApp.controller('EmployeeListController', function EmployeeListContro
     $scope.loadData = function () {
         var numberOfEmployees = Math.floor(Math.random() * (40 - 20) + 20);
         $.ajax({
-            url: `https://randomuser.me/api/?nat=dk,gb,us&inc=name,phone,email,location,picture,login,nat&results=${numberOfEmployees}`,
+            url: '/Home/GetUsers',
             dataType: 'json',
             success: function (r) {
-                var data = r.results.map($scope.randomUserToPerson);
+                console.log(r)
+                /*var data = r.results.map($scope.randomUserToPerson);
                 $scope.employees = data;
-                $scope.$apply();
+                $scope.$apply();*/
             }
         });
     };
