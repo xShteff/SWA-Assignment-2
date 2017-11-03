@@ -1,6 +1,8 @@
 # SWA-Assignment-2
-Design and implement an application of your own choice. The application must fulfil the following
-requirements:
+
+Application is hosted [here!](http://swaassignment220171103051134.azurewebsites.net/)
+
+Design and implement an application of your own choice. The application must fulfil the following requirements:
 * The application must be a client/server application
 * The client side of the application must be implemented using JavaScript HTML and CSS. There are
 no requirements about the choice of server side architecture or languages.
