@@ -5,7 +5,7 @@
     "jquery": "3.2.1",
     "angular": "angularjs#v1.6.7-build.5496+sha.181ac0b",
     "bootstrap": "v4.0.0-beta",
-    "popper.js": "v1.12.6"
+    "popper.js": "v1.11.0"
   },
   "resolutions": {
     "jquery": "3.2.1"
