@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace SwaAssignment2.Users
 {
     public interface IUserDatabase
     {
-        Task<IEnumerable<Person>> GetRandomUsers(int numberOfEmployees);
+        IEnumerable<Person> GetAllUsers();
+        void RemoveUser(string id);
+        void UpdateDataForUser(string id, Person updatedUser);
+        void AddUser(Person user);
+        Person GetUser(string id);
     }
 }

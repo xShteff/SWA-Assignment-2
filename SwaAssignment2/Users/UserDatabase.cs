@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -10,7 +11,40 @@ namespace SwaAssignment2.Users
 {
     public class UserDatabase : IUserDatabase
     {
-        public async Task<IEnumerable<Person>> GetRandomUsers(int numberOfEmployees)
+        private readonly List<Person> _users = new List<Person>();
+
+        public UserDatabase()
+        {
+            LoadNewUsers(20).Wait();
+        }
+
+        public IEnumerable<Person> GetAllUsers()
+        {
+            return _users;
+        }
+
+        public void RemoveUser(string id)
+        {
+            _users.RemoveAll(person => person.Id == id);
+        }
+
+        public void UpdateDataForUser(string id, Person updatedUser)
+        {
+            RemoveUser(id);
+            _users.Add(updatedUser);
+        }
+
+        public void AddUser(Person user)
+        {
+            _users.Add(user);
+        }
+
+        public Person GetUser(string id)
+        {
+            return _users.FirstOrDefault(user => user.Id == id);
+        }
+
+        public async Task LoadNewUsers(int count)
         {
             var users = new List<Person>();
             var rng = new Random();
@@ -19,7 +53,7 @@ namespace SwaAssignment2.Users
                 client.BaseAddress = new Uri("https://randomuser.me/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage response = await client.GetAsync($"api/?nat=dk,gb,us&inc=name,phone,email,location,picture,login,nat&results={numberOfEmployees}");
+                HttpResponseMessage response = await client.GetAsync($"api/?nat=dk,gb,us&inc=name,phone,email,location,picture,login,nat&results={count}");
                 if (response.IsSuccessStatusCode)
                 {
                     string json = await response.Content.ReadAsStringAsync();
@@ -54,7 +88,7 @@ namespace SwaAssignment2.Users
                     }
                 }
             }
-            return users;
+            _users.AddRange(users);
         }
     }
 }
