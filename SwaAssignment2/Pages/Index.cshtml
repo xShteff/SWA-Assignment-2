@@ -66,7 +66,7 @@
                     <div style="width:40px; height:40px;background:url('{{employee.picture}}');background-size: 100%; background-repeat:no-repeat;"></div>
                 </td>
                 <td>{{employee.name.firstName}} {{employee.name.lastName}}</td>
-                <td><a href="tel:{{employee.phone}}">{{employee.phone}}</a></td>
+                <td><a ng-href="tel:{{employee.phone}}">{{employee.phone}}</a></td>
                 <td><a ng-href="mailto:{{employee.email}}">{{employee.email}}</a></td>
                 <td><img ng-src="{{getFlagUrl(employee.nationality)}}" style='height:20px;'> {{employee.address.postcode}} {{employee.address.city}} {{employee.address.state}} {{employee.address.street}}</td>
                 <td>${{employee.salary}}</td>
