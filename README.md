@@ -1,6 +1,6 @@
 # SWA-Assignment-2
 
-Application is hosted [here!](http://swaassignment220171103051134.azurewebsites.net/)
+Application is hosted [here!](http://swaassignment220171121022343.azurewebsites.net/)
 
 Design and implement an application of your own choice. The application must fulfil the following requirements:
 * The application must be a client/server application
