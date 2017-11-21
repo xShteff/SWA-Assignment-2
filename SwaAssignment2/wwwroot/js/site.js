@@ -54,7 +54,7 @@ employeeListApp.filter('filterEmployees', function () {
 
 employeeListApp.controller('EmployeeListController', function ($scope, $http) {
     $scope.randomUserToPerson = function (user) {
-        var salary = user.salary ? user.salary : parseInt(Math.floor(Math.random() * 40) + 10) * 1000;
+        var salary = user.salary;
         var name = new Name(user.name.first, user.name.last);
         var location = new Location(user.location.city, user.location.postcode, user.location.state, user.location.street);
         var person = new Person(user.login.username, name, user.email, user.phone, location, user.picture.large, user.nat, salary);
