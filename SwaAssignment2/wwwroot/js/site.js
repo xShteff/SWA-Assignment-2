@@ -52,7 +52,7 @@ employeeListApp.filter('filterEmployees', function () {
     };
 });
 
-employeeListApp.controller('EmployeeListController', function EmployeeListController($scope) {
+employeeListApp.controller('EmployeeListController', function ($scope, $http) {
     $scope.randomUserToPerson = function (user) {
         var salary = user.salary ? user.salary : parseInt(Math.floor(Math.random() * 40) + 10) * 1000;
         var name = new Name(user.name.first, user.name.last);
@@ -77,9 +77,9 @@ employeeListApp.controller('EmployeeListController', function EmployeeListContro
             success: function (r) {
                 var data = r
                     .map(obj => Object.assign(new Person, obj));
-                    // figure out a better way to do this
-                    //.map(obj => Object.assign(new Location, obj.nationality))
-                    //.map(obj => Object.assign(new Name, obj.name));
+                // figure out a better way to do this
+                //.map(obj => Object.assign(new Location, obj.nationality))
+                //.map(obj => Object.assign(new Name, obj.name));
                 $scope.employees = data;
                 $scope.$apply();
             }
@@ -89,8 +89,15 @@ employeeListApp.controller('EmployeeListController', function EmployeeListContro
         return $scope.addUserForm[key].$invalid;
     };
     $scope.addEmployee = function (user) {
-        $scope.employees.push($scope.randomUserToPerson(user));
+        const newUser = $scope.randomUserToPerson(user);
         $scope.user = {};
+        $http.post("/api/Users/", newUser)
+            .then(function () {
+                $scope.employees.push(newUser);
+                $scope.$apply();
+            }, function () {
+                console.log("Erro posting new user");
+            });
     };
     $scope.removeEmployee = function (id) {
         if (confirm("Are you sure you want to remove the employee?\nThis action is irreversible and you will have to add him back manually!")) {
