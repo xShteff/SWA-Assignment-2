@@ -76,9 +76,10 @@ employeeListApp.controller('EmployeeListController', function EmployeeListContro
             dataType: 'json',
             success: function (r) {
                 var data = r
-                    .map(obj => Object.assign(new Person, obj))
-                    .map(obj => Object.assign(new Location, obj.location))
-                    .map(obj => Object.assign(new Name, obj.name));
+                    .map(obj => Object.assign(new Person, obj));
+                    // figure out a better way to do this
+                    //.map(obj => Object.assign(new Location, obj.nationality))
+                    //.map(obj => Object.assign(new Name, obj.name));
                 $scope.employees = data;
                 $scope.$apply();
             }
@@ -92,10 +93,17 @@ employeeListApp.controller('EmployeeListController', function EmployeeListContro
         $scope.user = {};
     };
     $scope.removeEmployee = function (id) {
-        if (confirm("Are you sure you want to remove the employee?\nThis action is irreversible and you will have to add him back manually!"))
-            for (var i = 0; i < $scope.employees.length; i++)
-                if ($scope.employees[i].id.toLowerCase() === id.toLowerCase())
+        if (confirm("Are you sure you want to remove the employee?\nThis action is irreversible and you will have to add him back manually!")) {
+            for (var i = 0; i < $scope.employees.length; i++) {
+                if ($scope.employees[i].id.toLowerCase() === id.toLowerCase()) {
                     $scope.employees.splice(i, 1);
+                    $.ajax({
+                        type: "DELETE",
+                        url: `/api/Users/${id}`
+                    });
+                }
+            }
+        }
     };
 
 });
