@@ -9,18 +9,18 @@ namespace SwaAssignment2.Controllers
     [Route("api/Users")]
     public class UsersController : Controller
     {
-        private readonly IUserProvider _userProvider;
+        private readonly IUserDatabase _userDatabase;
 
-        public UsersController(IUserProvider provider)
+        public UsersController(IUserDatabase database)
         {
-            _userProvider = provider;
+            _userDatabase = database;
         }
 
         // GET: api/Users
         [HttpGet]
         public async Task<IEnumerable<Person>> Get()
         {
-            return await _userProvider.GetRandomUsers(20);
+            return await _userDatabase.GetRandomUsers(20);
         }
 
         // GET: api/Users/5

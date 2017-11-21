@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace SwaAssignment2.Users
 {
-    public interface IUserProvider
+    public interface IUserDatabase
     {
         Task<IEnumerable<Person>> GetRandomUsers(int numberOfEmployees);
     }

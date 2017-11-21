@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace SwaAssignment2.Users
 {
-    public class UserProvider : IUserProvider
+    public class UserDatabase : IUserDatabase
     {
         public async Task<IEnumerable<Person>> GetRandomUsers(int numberOfEmployees)
         {
