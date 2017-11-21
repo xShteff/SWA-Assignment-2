@@ -1,4 +1,4 @@
-﻿var employeeListApp = angular.module('employeeListApp', []);
+﻿var employeeListApp = angular.module("employeeListApp", []);
 
 class Person {
     constructor(id, name, email, phone, address, picture, nationality, salary) {
@@ -41,7 +41,7 @@ class Location {
     }
 }
 
-employeeListApp.filter('filterEmployees', function () {
+employeeListApp.filter("filterEmployees", function () {
     return function (employees, letter) {
         if (letter === undefined) {
             return employees;
@@ -52,12 +52,12 @@ employeeListApp.filter('filterEmployees', function () {
     };
 });
 
-employeeListApp.controller('EmployeeListController', function ($scope, $http) {
+employeeListApp.controller("EmployeeListController", function ($scope, $http) {
     $scope.randomUserToPerson = function (user) {
-        var salary = user.salary;
-        var name = new Name(user.name.first, user.name.last);
-        var location = new Location(user.location.city, user.location.postcode, user.location.state, user.location.street);
-        var person = new Person(user.login.username, name, user.email, user.phone, location, user.picture.large, user.nat, salary);
+        const salary = user.salary;
+        const name = new Name(user.name.first, user.name.last);
+        const location = new Location(user.location.city, user.location.postcode, user.location.state, user.location.street);
+        const person = new Person(user.login.username, name, user.email, user.phone, location, user.picture.large, user.nat, salary);
         return person;
     };
     $scope.employees = [];
@@ -65,8 +65,8 @@ employeeListApp.controller('EmployeeListController', function ($scope, $http) {
         return `https://lipis.github.io/flag-icon-css/flags/4x3/${nationality.toLowerCase()}.svg`;
     };
     $scope.totalSalary = function () {
-        var salaries = [];
-        for (var i = 0; i < $scope.employees.length; i++)
+        const salaries = [];
+        for (let i = 0; i < $scope.employees.length; i++)
             salaries.push($scope.employees[i].salary);
         return salaries.length ? salaries.reduce(function (sum, value) { return sum + value; }) : 0;
     };
