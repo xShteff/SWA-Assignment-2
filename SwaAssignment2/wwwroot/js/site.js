@@ -71,19 +71,15 @@ employeeListApp.controller('EmployeeListController', function ($scope, $http) {
         return salaries.length ? salaries.reduce(function (sum, value) { return sum + value; }) : 0;
     };
     $scope.loadData = function () {
-        $.ajax({
-            url: '/api/Users',
-            dataType: 'json',
-            success: function (r) {
-                var data = r
+        $http.get("/api/Users")
+            .then(function (result) {
+                const data = result.data
                     .map(obj => Object.assign(new Person, obj));
                 // figure out a better way to do this
                 //.map(obj => Object.assign(new Location, obj.nationality))
                 //.map(obj => Object.assign(new Name, obj.name));
                 $scope.employees = data;
-                $scope.$apply();
-            }
-        });
+            });
     };
     $scope.fieldValidation = function (key) {
         return $scope.addUserForm[key].$invalid;
@@ -91,10 +87,10 @@ employeeListApp.controller('EmployeeListController', function ($scope, $http) {
     $scope.addEmployee = function (user) {
         const newUser = $scope.randomUserToPerson(user);
         $scope.user = {};
-        $http.post("/api/Users/", newUser)
+        $http
+            .post("/api/Users/", newUser)
             .then(function () {
                 $scope.employees.push(newUser);
-                $scope.$apply();
             }, function () {
                 console.log("Erro posting new user");
             });
@@ -104,14 +100,13 @@ employeeListApp.controller('EmployeeListController', function ($scope, $http) {
             for (let i = 0; i < $scope.employees.length; i++) {
                 if ($scope.employees[i].id.toLowerCase() === id.toLowerCase()) {
                     const indexToRemove = i;
-                    $.ajax({
-                        type: "DELETE",
-                        url: `/api/Users/${id}`,
-                        success: function () {
+                    $http
+                        .delete(`/api/Users/${id}`)
+                        .then(function () {
                             $scope.employees.splice(indexToRemove, 1);
-                            $scope.$apply();
-                        }
-                    });
+                        }, function () {
+                            console.log("Erro posting new user");
+                        });
                 }
             }
         }
