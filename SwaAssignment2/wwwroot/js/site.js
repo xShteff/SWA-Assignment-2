@@ -94,12 +94,16 @@ employeeListApp.controller('EmployeeListController', function EmployeeListContro
     };
     $scope.removeEmployee = function (id) {
         if (confirm("Are you sure you want to remove the employee?\nThis action is irreversible and you will have to add him back manually!")) {
-            for (var i = 0; i < $scope.employees.length; i++) {
+            for (let i = 0; i < $scope.employees.length; i++) {
                 if ($scope.employees[i].id.toLowerCase() === id.toLowerCase()) {
-                    $scope.employees.splice(i, 1);
+                    const indexToRemove = i;
                     $.ajax({
                         type: "DELETE",
-                        url: `/api/Users/${id}`
+                        url: `/api/Users/${id}`,
+                        success: function () {
+                            $scope.employees.splice(indexToRemove, 1);
+                            $scope.$apply();
+                        }
                     });
                 }
             }
