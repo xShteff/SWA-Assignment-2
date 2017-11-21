@@ -71,16 +71,14 @@ employeeListApp.controller('EmployeeListController', function EmployeeListContro
         return salaries.length ? salaries.reduce(function (sum, value) { return sum + value; }) : 0;
     };
     $scope.loadData = function () {
-        var numberOfEmployees = Math.floor(Math.random() * (40 - 20) + 20);
         $.ajax({
             url: '/api/Users',
             dataType: 'json',
             success: function (r) {
-                console.log(r);
                 var data = r
-                    .map(obj => Object.assign(new Person, obj));
-                    //.map(obj => Object.assign(new Location, obj.location))
-                    //.map(obj => Object.assign(new Name, obj.name));
+                    .map(obj => Object.assign(new Person, obj))
+                    .map(obj => Object.assign(new Location, obj.location))
+                    .map(obj => Object.assign(new Name, obj.name));
                 $scope.employees = data;
                 $scope.$apply();
             }
