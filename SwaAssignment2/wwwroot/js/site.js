@@ -111,5 +111,10 @@ employeeListApp.controller('EmployeeListController', function ($scope, $http) {
             }
         }
     };
-
+    $scope.loadMoreUsersOnServer = function() {
+        $http.get("/api/UserDatabase")
+            .then(function () {
+                $scope.loadData();
+            });
+    }
 });

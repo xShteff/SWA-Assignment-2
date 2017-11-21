@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SwaAssignment2.Users
 {
@@ -9,5 +10,6 @@ namespace SwaAssignment2.Users
         void UpdateDataForUser(string id, Person updatedUser);
         void AddUser(Person user);
         Person GetUser(string id);
+        Task LoadNewUsers(int count);
     }
 }
