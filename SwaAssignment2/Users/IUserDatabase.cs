@@ -11,5 +11,6 @@ namespace SwaAssignment2.Users
         void AddUser(Person user);
         Person GetUser(string id);
         Task LoadNewUsers(int count);
+        void DropAllUsers();
     }
 }

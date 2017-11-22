@@ -90,6 +90,11 @@ namespace SwaAssignment2.Users
             }
             _users.AddRange(users);
         }
+
+        public void DropAllUsers()
+        {
+            _users.Clear();
+        }
     }
 
     static class StringExtensions

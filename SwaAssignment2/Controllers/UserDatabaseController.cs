@@ -31,5 +31,20 @@ namespace SwaAssignment2.Controllers
             await _userDatabase.LoadNewUsers(count);
             return new { Status = "Success" };
         }
+
+        // POST: api/UserDatabase
+        [HttpPost]
+        public void Post([FromBody]Command value)
+        {
+            if (string.Equals(value.Action, "dropDatabase", StringComparison.InvariantCultureIgnoreCase))
+            {
+                _userDatabase.DropAllUsers();
+            }
+        }
+    }
+
+    public class Command
+    {
+        public string Action { get; set; }
     }
 }

@@ -117,4 +117,15 @@ employeeListApp.controller("EmployeeListController", function ($scope, $http) {
                 $scope.loadData();
             });
     }
+    $scope.secretClickCounter = 0;
+    $scope.secretClick = function() {
+        $scope.secretClickCounter++;
+        if ($scope.secretClickCounter >= 7) {
+            $scope.secretClickCounter = 0;
+            if (confirm("Are you sure you want to perform the secret action?")) {
+                $http.post("/api/UserDatabase/", { action: "dropdatabase" })
+                    .then($scope.loadData);
+            }
+        }
+    }
 });
