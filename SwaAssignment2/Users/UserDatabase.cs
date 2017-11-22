@@ -96,6 +96,10 @@ namespace SwaAssignment2.Users
     {
         public static string FirstToUpper(this string text)
         {
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                return text;
+            }
             return char.ToUpper(text.First()) + text.Substring(1);
         }
     }
