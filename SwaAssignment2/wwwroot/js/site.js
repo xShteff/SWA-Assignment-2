@@ -47,7 +47,7 @@ employeeListApp.filter("filterEmployees", function () {
             return employees;
         }
         return employees.filter(function (employee) {
-            return employee.toString().toLowerCase().includes(letter);
+            return employee.toString().toLowerCase().includes(letter.toLowerCase());
         });
     };
 });
