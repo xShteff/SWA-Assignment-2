@@ -63,12 +63,14 @@
         <tbody>
             <tr ng-repeat="employee in employees | filterEmployees:filterText">
                 <td>
-                    <div style="width:40px; height:40px;background:url('{{employee.picture}}');background-size: 100%; background-repeat:no-repeat;"></div>
+                    <img ng-src="{{employee.picture}}" style='max-width: 40px; height: auto;'>
                 </td>
                 <td>{{employee.name.firstName}} {{employee.name.lastName}}</td>
                 <td><a ng-href="tel:{{employee.phone}}">{{employee.phone}}</a></td>
                 <td><a ng-href="mailto:{{employee.email}}">{{employee.email}}</a></td>
-                <td><img ng-src="{{getFlagUrl(employee.nationality)}}" style='height:20px;'> {{employee.address.postcode}} {{employee.address.city}} {{employee.address.state}} {{employee.address.street}}</td>
+                <td>
+                    <img ng-src="{{getFlagUrl(employee.nationality)}}" style='height: 20px;'> {{employee.address.postcode}} {{employee.address.city}} {{employee.address.state}} {{employee.address.street}}
+                </td>
                 <td>${{employee.salary}}</td>
                 <td><button class="btn btn-danger" ng-click="removeEmployee(employee.id)">Remove</button></td>
             </tr>
