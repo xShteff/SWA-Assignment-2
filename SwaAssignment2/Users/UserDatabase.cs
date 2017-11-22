@@ -63,15 +63,15 @@ namespace SwaAssignment2.Users
                         var salary = rng.Next(1, 40) * 1000;
                         var name = new Name
                         {
-                            FirstName = randomUser.Name.First,
-                            LastName = randomUser.Name.Last
+                            FirstName = randomUser.Name.First.FirstToUpper(),
+                            LastName = randomUser.Name.Last.FirstToUpper()
                         };
                         var location = new Location
                         {
-                            City = randomUser.Location.City,
+                            City = randomUser.Location.City.FirstToUpper(),
                             Postcode = randomUser.Location.Postcode.ToString(),
-                            State = randomUser.Location.State,
-                            Street = randomUser.Location.Street
+                            State = randomUser.Location.State.FirstToUpper(),
+                            Street = randomUser.Location.Street.FirstToUpper()
                         };
                         var user = new Person
                         {
@@ -89,6 +89,14 @@ namespace SwaAssignment2.Users
                 }
             }
             _users.AddRange(users);
+        }
+    }
+
+    static class StringExtensions
+    {
+        public static string FirstToUpper(this string text)
+        {
+            return char.ToUpper(text.First()) + text.Substring(1);
         }
     }
 }
