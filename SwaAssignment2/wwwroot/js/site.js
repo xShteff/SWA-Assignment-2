@@ -113,10 +113,10 @@ employeeListApp.controller("EmployeeListController", function ($scope, $http) {
     };
     $scope.loadMoreUsersOnServer = function() {
         $http.get("/api/UserDatabase")
-            .then(function () {
+            .then(function() {
                 $scope.loadData();
             });
-    }
+    };
     $scope.secretClickCounter = 0;
     $scope.secretClick = function() {
         $scope.secretClickCounter++;
@@ -127,5 +127,5 @@ employeeListApp.controller("EmployeeListController", function ($scope, $http) {
                     .then($scope.loadData);
             }
         }
-    }
+    };
 });
